@@ -1,6 +1,6 @@
 import string
 import random
-from typing import List
+from typing import List, Callable
 from abc import ABC, abstractmethod
 
 
@@ -15,28 +15,29 @@ class SupportTicket:
         self.customer = customer
         self.issue = issue
 
-
-class TicketOrderingStrategy(ABC):
-    @abstractmethod
-    def create_ordering(self, list: List[SupportTicket]) -> List[SupportTicket]:
-        pass
+"""This class have been removed to start implmenting the strategies just with
+functions, because each class has only one method so its no needed that is a class"""
+# class TicketOrderingStrategy(ABC):
+#     @abstractmethod
+#     def create_ordering(self, list: List[SupportTicket]) -> List[SupportTicket]:
+#         pass
 
 """Now we can create classes for each of this specific ordering types"""
-class FIFOOrderingStrategy(TicketOrderingStrategy):
-    def create_ordering(self, list: List[SupportTicket]) -> List[SupportTicket]:
-        return list.copy()
+def fifo_ordering(list: List[SupportTicket]) -> List[SupportTicket]:
+    return list.copy()
 
-class FILOOrderingStrategy(TicketOrderingStrategy):
-    def create_ordering(self, list: List[SupportTicket]) -> List[SupportTicket]:
-        list_copy = list.copy()
-        list_copy.reverse()
-        return list_copy
+def filo_ordering(list: List[SupportTicket]) -> List[SupportTicket]:
+    list_copy = list.copy()
+    list_copy.reverse()
+    return list_copy
 
-class RandomOrderingStrategy(TicketOrderingStrategy):
-    def create_ordering(self, list: List[SupportTicket]) -> List[SupportTicket]:
-        list_copy = list.copy()
-        random.shuffle(list_copy)
-        return list_copy
+def random_ordering(list: List[SupportTicket]) -> List[SupportTicket]:
+    list_copy = list.copy()
+    random.shuffle(list_copy)
+    return list_copy
+
+def black_hole_ordering(list: List[SupportTicket]) -> List[SupportTicket]:
+    return []
 
 class CustomerSupport:
 
@@ -45,9 +46,9 @@ class CustomerSupport:
     def create_ticket(self, customer, issue):
         self.tickets.append(SupportTicket(customer, issue))
 
-    def process_tickets(self, processing_strategy):
+    def process_tickets(self, processing_strategy_fn: Callable[[List[SupportTicket]], List[SupportTicket]]):
         #create the ordered list
-        ticket_list = processing_strategy.create_ordering(self.tickets)
+        ticket_list = processing_strategy_fn(self.tickets)
 
         # if it's empty, don't do anything
         if len(ticket_list) == 0:
@@ -74,4 +75,4 @@ app.create_ticket("Linus Sebastian", "I can't upload any videos, please help.")
 app.create_ticket("Arjan Egges", "VSCode doesn't automatically solve my bugs.")
 
 # process the tickets
-app.process_tickets(RandomOrderingStrategy())
+app.process_tickets(random_ordering)
