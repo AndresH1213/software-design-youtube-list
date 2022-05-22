@@ -7,8 +7,8 @@ class LightBulb:
 
 
 class ElectricPowerSwitch:
-"""The implemention show us how to use the dependency inversion principle
-to remove this dependency of PowerSwitch on LigthBulb"""
+    """The implemention show us how to use the dependency inversion principle
+    to remove this dependency of PowerSwitch on LigthBulb"""
     def __init__(self, l: LightBulb):
         self.lightBulb = l
         self.on = False
