@@ -9,6 +9,7 @@ def subscribe(event_type: str, fn):
 
 
 def post_event(event_type: str, data):
+    # map of events an call the function in it
     if not event_type in subscribers:
         return
     for fn in subscribers[event_type]:
