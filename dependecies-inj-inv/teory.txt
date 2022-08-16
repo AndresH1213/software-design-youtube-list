@@ -1,0 +1,23 @@
+When we talk about dependency in object oriented programming. We use to refer to an object
+type that a class is in directly relation with, means that the class and the object type are
+coupled. For example class could depend in another class because it has an attribute of that
+type, or because a method receives a parameter of that class, or because the class inherits
+from that class which is the strongest dependency relationship, and is the most difficult to
+decouple, this is why in most of cases composition is better that inheritence.
+
+Dependency injection is a design pattern, the idea of the pattern is that if a class uses an
+object of a certain type we are not also making that class for creating that object. Because it
+shifts the creation responsabily to another class, dependency injection is an inversion of control
+technique a big advantage of dependency injection is as a result your code is easy to test.
+
+Dependency inversion is a principle part of (SOLID principles) that principle aims to decouple
+concrete classes using abstrations. Abstract classes, interfaces, etc. Because you need the class
+type in order to construct the object this also means that dependency inversion is only possible
+if you separate creation from use.
+
+CONCLUSION
+
+Dependency injection is a patter where we split creating your object from using your object by 
+passing the object as a parameter. Dependency inversion means that we introduce an extra layer
+between objects in form of an abstract class so they are less depending on each other and that
+means that you can replace one object with the subtype of another object
