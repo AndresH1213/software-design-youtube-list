@@ -1,5 +1,4 @@
 """
-Very advanced Employee management system with composition design.
 Composition over inheritance.
 """
 
